@@ -1,0 +1,96 @@
+/* ============================
+   催促くん - result.css
+   生成結果エリアのスタイル
+   ============================ */
+
+/* ---------- リザルトカード ---------- */
+.result-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  margin-bottom: var(--spacing-lg);
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease both;
+}
+
+.result-card:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.result-card:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+/* ---------- カードヘッダー ---------- */
+.result-card__header {
+  background-color: #f8f6f0;
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--spacing-md);
+}
+
+.result-card__label {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-xs);
+  letter-spacing: 0.04em;
+}
+
+.result-card__desc {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
+
+/* ---------- カード本文（テンプレート表示） ---------- */
+.result-card__body {
+  padding: var(--spacing-md);
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: #fff;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  max-height: none;
+  overflow: visible;
+}
+
+/* ---------- コピーボタン ---------- */
+.btn--copy {
+  background-color: var(--color-accent);
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  min-height: 48px;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  width: 100%;
+  transition: background-color 0.15s ease;
+}
+
+.btn--copy:hover {
+  background-color: var(--color-accent-hover);
+}
+
+.btn--copy.is-copied {
+  background-color: var(--color-success);
+}
+
+/* ---------- リセットボタンエリア ---------- */
+.result-actions {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+/* ---------- アニメーション ---------- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

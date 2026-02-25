@@ -1,0 +1,143 @@
+/* ============================
+   催促くん - form.css
+   入力フォームのスタイル
+   ============================ */
+
+/* ---------- フォームカード ---------- */
+.form-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ---------- フォームグループ ---------- */
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-group__label {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
+  letter-spacing: 0.03em;
+}
+
+.form-group__label .required {
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  margin-left: var(--spacing-xs);
+  font-family: var(--font-sans);
+}
+
+/* ---------- 入力フィールド共通 ---------- */
+.form-input,
+.form-select,
+.form-date {
+  display: block;
+  width: 100%;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: #fff;
+  color: var(--color-text);
+  transition: border-color 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-date:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.12);
+}
+
+/* ---------- 金額入力ラッパー ---------- */
+.amount-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.amount-wrapper__prefix {
+  position: absolute;
+  left: 12px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.amount-wrapper .form-input {
+  padding-left: 32px;
+}
+
+/* ---------- セレクト矢印 ---------- */
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.65rem;
+  color: var(--color-text-light);
+  pointer-events: none;
+}
+
+.select-wrapper .form-select {
+  padding-right: 36px;
+}
+
+/* ---------- エラー表示 ---------- */
+.form-input.is-error,
+.form-select.is-error,
+.form-date.is-error {
+  border-color: var(--color-error);
+  box-shadow: 0 0 0 2px rgba(204, 0, 0, 0.1);
+}
+
+.error-message {
+  display: none;
+  font-size: 0.82rem;
+  color: var(--color-error);
+  margin-top: var(--spacing-xs);
+  font-weight: 500;
+}
+
+/* ---------- ヒントテキスト ---------- */
+.form-hint {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  margin-top: var(--spacing-xs);
+}
+
+/* ---------- 送信ボタン ---------- */
+.form-submit {
+  margin-top: var(--spacing-xl);
+}
+
+/* ---------- 注意書き ---------- */
+.form-notice {
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: #faf8f0;
+  border: 1px solid #e0ddd0;
+  border-left: 3px solid var(--color-accent);
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
