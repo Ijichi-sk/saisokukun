@@ -36,7 +36,7 @@ export const TEMPLATES = [
     label: '丁寧系',
     description: '礼儀正しく，お願いベースの文体',
     generate: ({ targetName, subject, amount, dueDate, siteUrl }) =>
-      `${targetName}さん，先日の${subject}の件ですが，\n¥${amount}のお振込みを${dueDate}までにお願いできますでしょうか．\nよろしくお願いいたします．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+      `${targetName}さん，先日の${subject}の件ですが，\n¥${amount}のお振込みを${dueDate}にお願いできますでしょうか．\nよろしくお願いいたします．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
   },
   {
     id: 'formal',
@@ -50,7 +50,7 @@ export const TEMPLATES = [
     label: '圧力系',
     description: '法的通知書・督促状風の硬い文体',
     generate: ({ targetName, subject, amount, dueDate, siteUrl }) =>
-      `支払督促通知書\n\n受取人　${targetName} 殿\n\n上記の者に対し，${subject}として立替済みの\n金¥${amount}也を${dueDate}までに支払うよう通知する．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+      `支払督促通知書\n\n受取人　${targetName} 殿\n\n上記の者に対し，${subject}として立替済みの\n金¥${amount}也を${dueDate}に支払うよう通知する．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
   },
 ];
 

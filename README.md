@@ -42,7 +42,7 @@ npx serve .
 python -m http.server 8000
 ```
 
-ブラウザで `http://localhost:3000`（または `http://localhost:8000`）を開きます．
+ブラウザで `http://localhost:8000`　を開きます．
 
 ## フォルダ構成
 
