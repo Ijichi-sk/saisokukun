@@ -1,76 +1,93 @@
 /* ============================
    催促くん - result.css
-   生成結果エリアのスタイル
+   RPG UI風リザルト（クリーン）
    ============================ */
 
 /* ---------- リザルトカード ---------- */
 .result-card {
-  background-color: var(--color-card);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
   margin-bottom: var(--spacing-lg);
   overflow: hidden;
-  animation: fadeInUp 0.3s ease both;
+  animation: slideIn 0.35s ease both;
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .result-card:nth-child(2) {
-  animation-delay: 0.1s;
+  animation-delay: 0.12s;
 }
 
 .result-card:nth-child(3) {
-  animation-delay: 0.2s;
+  animation-delay: 0.24s;
 }
 
 /* ---------- カードヘッダー ---------- */
 .result-card__header {
-  background-color: #f8f6f0;
+  background-color: var(--color-surface-alt);
   border-bottom: 1px solid var(--color-border);
   padding: var(--spacing-md);
 }
 
 .result-card__label {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  color: var(--color-accent);
+  font-family: var(--font-rpg);
+  font-size: 0.9rem;
+  color: var(--color-text);
   margin-bottom: var(--spacing-xs);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
 }
 
 .result-card__desc {
-  font-size: 0.8rem;
-  color: var(--color-text-light);
+  font-family: var(--font-rpg);
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.03em;
 }
 
 /* ---------- カード本文（テンプレート表示） ---------- */
 .result-card__body {
-  padding: var(--spacing-md);
-  font-family: var(--font-sans);
+  padding: var(--spacing-lg) var(--spacing-md);
+  font-family: var(--font-body);
   font-size: 0.92rem;
-  line-height: 1.8;
+  line-height: 1.9;
   white-space: pre-wrap;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: #ffffff;
   color: var(--color-text);
   border-bottom: 1px solid var(--color-border);
-  max-height: none;
-  overflow: visible;
 }
 
 /* ---------- コピーボタン ---------- */
 .btn--copy {
   background-color: var(--color-accent);
-  color: #fff;
+  color: #ffffff;
+  font-family: var(--font-rpg);
   border: none;
   border-radius: 0;
   min-height: 48px;
-  font-size: 0.95rem;
-  letter-spacing: 0.04em;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
   width: 100%;
-  transition: background-color 0.15s ease;
+  transition: all 0.15s ease;
 }
 
 .btn--copy:hover {
   background-color: var(--color-accent-hover);
+}
+
+.btn--copy:active {
+  transform: scale(0.98);
 }
 
 .btn--copy.is-copied {
@@ -84,7 +101,7 @@
 }
 
 /* ---------- アニメーション ---------- */
-@keyframes fadeInUp {
+@keyframes slideIn {
   from {
     opacity: 0;
     transform: translateY(12px);

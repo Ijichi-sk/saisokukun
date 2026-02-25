@@ -1,22 +1,27 @@
 /* ============================
    催促くん - base.css
-   リセット / CSS変数 / タイポグラフィ / 共通レイアウト
+   RPG UI風 クリーンデザイン
    ============================ */
+
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 
 /* ---------- CSS Custom Properties ---------- */
 :root {
-  --color-accent: #8b0000;
-  --color-accent-hover: #a00000;
-  --color-bg: #f5f5f0;
-  --color-card: #ffffff;
-  --color-text: #1a1a18;
-  --color-text-light: #555550;
-  --color-border: #c0c0b8;
-  --color-error: #cc0000;
-  --color-success: #2e7d32;
+  --color-bg: #f0f0f0;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f7f7f5;
+  --color-text: #2a2a2a;
+  --color-text-dim: #888888;
+  --color-border: #d0d0d0;
+  --color-border-strong: #aaaaaa;
+  --color-accent: #4a4a4a;
+  --color-accent-hover: #333333;
+  --color-highlight: #5a7abf;
+  --color-error: #cc3333;
+  --color-success: #3a8a4a;
 
-  --font-serif: 'Noto Serif JP', serif;
-  --font-sans: 'Noto Sans JP', sans-serif;
+  --font-rpg: 'DotGothic16', 'MS Gothic', monospace;
+  --font-body: 'Zen Maru Gothic', sans-serif;
 
   --max-width: 680px;
   --spacing-xs: 4px;
@@ -27,6 +32,10 @@
   --spacing-xxl: 48px;
 
   --radius: 2px;
+  --radius-lg: 4px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* ---------- Reset ---------- */
@@ -44,7 +53,7 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   font-weight: 400;
   line-height: 1.7;
   color: var(--color-text);
@@ -54,24 +63,14 @@ body {
 
 /* ---------- タイポグラフィ ---------- */
 h1, h2, h3 {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  line-height: 1.3;
+  font-family: var(--font-rpg);
+  font-weight: 400;
+  line-height: 1.4;
 }
 
-h1 {
-  font-size: 1.6rem;
-  letter-spacing: 0.08em;
-}
-
-h2 {
-  font-size: 1.2rem;
-  letter-spacing: 0.04em;
-}
-
-h3 {
-  font-size: 1.05rem;
-}
+h1 { font-size: 1.5rem; letter-spacing: 0.12em; }
+h2 { font-size: 1.1rem; letter-spacing: 0.06em; }
+h3 { font-size: 0.95rem; letter-spacing: 0.04em; }
 
 /* ---------- 共通レイアウト ---------- */
 .container {
@@ -80,48 +79,102 @@ h3 {
   padding: var(--spacing-md);
 }
 
+/* ---------- RPG UIパネル ---------- */
+.rpg-panel {
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  position: relative;
+}
+
+.rpg-panel::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
 /* ---------- ヘッダー ---------- */
 .header {
-  background-color: var(--color-accent);
-  color: #fff;
+  background-color: var(--color-surface);
   text-align: center;
-  padding: var(--spacing-lg) var(--spacing-md);
-  border-bottom: 3px solid #600000;
+  padding: var(--spacing-xl) var(--spacing-md) var(--spacing-lg);
+  border-bottom: 2px solid var(--color-border-strong);
+  position: relative;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.header__icon {
+  font-size: 1.8rem;
+  margin-bottom: var(--spacing-sm);
+  display: block;
 }
 
 .header__title {
-  font-family: var(--font-serif);
-  font-size: 1.8rem;
-  letter-spacing: 0.12em;
-  margin-bottom: var(--spacing-xs);
+  font-family: var(--font-rpg);
+  font-size: 1.6rem;
+  letter-spacing: 0.15em;
+  color: var(--color-text);
+  margin-bottom: 2px;
 }
 
 .header__subtitle {
-  font-size: 0.85rem;
-  font-weight: 300;
-  opacity: 0.85;
-  font-family: var(--font-sans);
+  font-family: var(--font-rpg);
+  font-size: 0.78rem;
+  color: var(--color-text-dim);
+  letter-spacing: 0.06em;
+}
+
+.header__border {
+  display: block;
+  margin: var(--spacing-md) auto 0;
+  width: 40%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
 }
 
 /* ---------- フッター ---------- */
 .footer {
   text-align: center;
   padding: var(--spacing-lg) var(--spacing-md);
-  font-size: 0.75rem;
-  color: var(--color-text-light);
+  font-family: var(--font-rpg);
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
   border-top: 1px solid var(--color-border);
   margin-top: var(--spacing-xxl);
+  letter-spacing: 0.04em;
 }
 
 /* ---------- セクション見出し ---------- */
 .section-title {
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  border-bottom: 2px solid var(--color-accent);
-  padding-bottom: var(--spacing-sm);
+  font-family: var(--font-rpg);
+  font-size: 1rem;
+  color: var(--color-text);
+  letter-spacing: 0.08em;
+  padding: var(--spacing-sm) var(--spacing-md);
   margin-bottom: var(--spacing-lg);
-  color: var(--color-accent);
-  letter-spacing: 0.06em;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.section-title::before {
+  content: '▶ ';
+  font-size: 0.65em;
+  opacity: 0.5;
 }
 
 /* ---------- 非表示ユーティリティ ---------- */
@@ -132,39 +185,228 @@ h3 {
 /* ---------- 共通ボタン ---------- */
 .btn {
   display: inline-block;
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  font-weight: 500;
+  font-family: var(--font-rpg);
+  font-size: 0.92rem;
   text-align: center;
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: background-color 0.15s ease, opacity 0.15s ease;
+  transition: all 0.15s ease;
   min-height: 48px;
   padding: var(--spacing-sm) var(--spacing-lg);
   width: 100%;
+  letter-spacing: 0.06em;
 }
 
 .btn:active {
-  opacity: 0.85;
+  transform: scale(0.98);
 }
 
 .btn--primary {
   background-color: var(--color-accent);
-  color: #fff;
-  letter-spacing: 0.05em;
+  color: #ffffff;
+  border: 2px solid var(--color-accent);
 }
 
 .btn--primary:hover {
   background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
 }
 
 .btn--secondary {
   background-color: transparent;
   color: var(--color-accent);
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--color-border-strong);
 }
 
 .btn--secondary:hover {
-  background-color: rgba(139, 0, 0, 0.05);
+  background-color: var(--color-surface-alt);
+}
+
+/* ---------- 戻るリンク ---------- */
+.header__back {
+  display: inline-block;
+  font-family: var(--font-rpg);
+  font-size: 0.78rem;
+  color: var(--color-text-dim);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--spacing-sm);
+  transition: color 0.15s ease;
+}
+
+.header__back:hover {
+  color: var(--color-text);
+}
+
+/* ---------- ランディング メニュー ---------- */
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (max-width: 500px) {
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 2px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl) var(--spacing-md);
+  box-shadow: var(--shadow-md);
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.menu-card::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.menu-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.menu-card:active {
+  transform: translateY(0);
+}
+
+.menu-card__icon {
+  font-size: 2.4rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.menu-card__title {
+  font-family: var(--font-rpg);
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--spacing-sm);
+}
+
+.menu-card__desc {
+  font-family: var(--font-rpg);
+  font-size: 0.72rem;
+  color: var(--color-text-dim);
+  line-height: 1.6;
+  letter-spacing: 0.03em;
+}
+
+/* ---------- メンバー行（動的リスト） ---------- */
+.member-list {
+  margin-bottom: var(--spacing-sm);
+}
+
+.member-row {
+  margin-bottom: var(--spacing-sm);
+}
+
+.member-row__fields {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.member-row__name {
+  flex: 1;
+}
+
+.member-row__amount {
+  flex: 0 0 130px;
+}
+
+.member-row__remove {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface-alt);
+  color: var(--color-text-dim);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.member-row__remove:hover {
+  border-color: var(--color-error);
+  color: var(--color-error);
+  background: #fff;
+}
+
+/* ---------- 追加ボタン ---------- */
+.btn--add {
+  background: transparent;
+  color: var(--color-accent);
+  border: 1px dashed var(--color-border-strong);
+  font-family: var(--font-rpg);
+  font-size: 0.85rem;
+  min-height: 40px;
+  letter-spacing: 0.06em;
+}
+
+.btn--add:hover {
+  background-color: var(--color-surface-alt);
+  border-style: solid;
+}
+
+/* ---------- トグルグループ（割り勘/個別） ---------- */
+.toggle-group {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.toggle-option {
+  flex: 1;
+  cursor: pointer;
+}
+
+.toggle-option input[type="radio"] {
+  display: none;
+}
+
+.toggle-option__label {
+  display: block;
+  text-align: center;
+  font-family: var(--font-rpg);
+  font-size: 0.82rem;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text-dim);
+  transition: all 0.15s ease;
+  letter-spacing: 0.04em;
+}
+
+.toggle-option input[type="radio"]:checked + .toggle-option__label {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+}
+
+/* ---------- 任意ラベル ---------- */
+.optional {
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  margin-left: var(--spacing-xs);
 }

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>出欠確認 ─ 催促くん</title>
+  <meta name="description" content="イベントの出欠確認テンプレートを自動生成。グループLINEに貼り付けるだけで出欠を取れます。">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="css/result.css">
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="header__back">◀ メニューに戻る</a>
+    <span class="header__icon">📋</span>
+    <h1 class="header__title">出欠確認</h1>
+    <p class="header__subtitle">出欠確認テンプレート 自動生成</p>
+    <span class="header__border"></span>
+  </header>
+
+  <main class="container">
+
+    <!-- ===== 入力フォーム ===== -->
+    <section id="formSection">
+      <h2 class="section-title">出欠確認フォーム</h2>
+
+      <form id="attendanceForm" class="form-card" novalidate>
+
+        <!-- イベント名 -->
+        <div class="form-group">
+          <label class="form-group__label" for="eventName">
+            イベント名<span class="required">（必須）</span>
+          </label>
+          <input type="text" id="eventName" class="form-input" maxlength="50" placeholder="例：新年会，歓迎会" autocomplete="off">
+          <span id="eventName-error" class="error-message"></span>
+        </div>
+
+        <!-- 日付 -->
+        <div class="form-group">
+          <label class="form-group__label" for="eventDate">
+            日付<span class="required">（必須）</span>
+          </label>
+          <input type="date" id="eventDate" class="form-input form-date">
+          <span id="eventDate-error" class="error-message"></span>
+        </div>
+
+        <!-- 時間（任意） -->
+        <div class="form-group">
+          <label class="form-group__label" for="eventTime">
+            時間<span class="optional">（任意）</span>
+          </label>
+          <input type="time" id="eventTime" class="form-input">
+        </div>
+
+        <!-- 場所（任意） -->
+        <div class="form-group">
+          <label class="form-group__label" for="place">
+            場所<span class="optional">（任意）</span>
+          </label>
+          <input type="text" id="place" class="form-input" maxlength="50" placeholder="例：渋谷駅周辺" autocomplete="off">
+          <span id="place-error" class="error-message"></span>
+        </div>
+
+        <!-- 参加者リスト -->
+        <div class="form-group">
+          <label class="form-group__label">
+            参加者<span class="required">（必須）</span>
+          </label>
+          <div id="memberList" class="member-list">
+            <!-- JS側で動的生成 -->
+          </div>
+          <span id="memberList-error" class="error-message"></span>
+          <button type="button" id="addMemberBtn" class="btn btn--add">＋ 参加者を追加</button>
+        </div>
+
+        <!-- 回答期限 -->
+        <div class="form-group">
+          <label class="form-group__label" for="deadline">
+            回答期限<span class="required">（必須）</span>
+          </label>
+          <input type="date" id="deadline" class="form-input form-date">
+          <span id="deadline-error" class="error-message"></span>
+        </div>
+
+        <!-- 送信 -->
+        <div class="form-submit">
+          <button type="submit" class="btn btn--primary">▶ テンプレートを生成する</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== 結果 ===== -->
+    <section id="resultSection" class="hidden">
+      <h2 class="section-title">生成結果</h2>
+      <div id="resultContainer"></div>
+      <div class="result-actions">
+        <button type="button" id="resetBtn" class="btn btn--secondary">◀ 最初からやり直す</button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>催促くん &copy; 2026 ─ 本サービスはジョークツールです</p>
+  </footer>
+
+  <script type="module" src="js/attendance-app.js"></script>
+</body>
+</html>

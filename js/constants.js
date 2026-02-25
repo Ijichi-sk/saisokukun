@@ -3,6 +3,8 @@
  * 件名選択肢・テンプレート文字列・バリデーションルール
  */
 
+// ─── お金の催促 ───
+
 // 件名選択肢（グループ分け）
 export const SUBJECT_OPTIONS = [
   {
@@ -29,8 +31,8 @@ export const SUBJECT_OPTIONS = [
 // サイトURL（ネタバラシ文言用）
 export const SITE_URL = 'https://saisokukun.example.com';
 
-// テンプレート定義
-export const TEMPLATES = [
+// お金テンプレート（単体用）
+export const MONEY_TEMPLATES = [
   {
     id: 'polite',
     label: '丁寧系',
@@ -54,9 +56,63 @@ export const TEMPLATES = [
   },
 ];
 
+// お金テンプレート（グループ一括用 — LINEグループ向け）
+export const MONEY_GROUP_TEMPLATES = [
+  {
+    id: 'polite',
+    label: '丁寧系',
+    description: '礼儀正しく，お願いベースの文体',
+    generate: ({ subject, dueDate, memberLines, siteUrl }) =>
+      `皆さん，先日の${subject}の件です．\nお手数ですが${dueDate}までにお振込みをお願いいたします．\n\n${memberLines}\n\nよろしくお願いいたします．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+  },
+  {
+    id: 'formal',
+    label: '事務的系',
+    description: '感情を排した業務通知口調',
+    generate: ({ subject, dueDate, memberLines, siteUrl }) =>
+      `【自動通知】支払期日のご案内\n\n件　名：${subject}\n期　日：${dueDate}\n\n▼ 対象者一覧\n${memberLines}\n\nお手数ですが期日までのお手続きをお願いいたします．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+  },
+  {
+    id: 'pressure',
+    label: '圧力系',
+    description: '法的通知書・督促状風の硬い文体',
+    generate: ({ subject, dueDate, memberLines, siteUrl }) =>
+      `支払督促通知書\n\n下記の者に対し，${subject}として立替済みの金額を${dueDate}までに支払うよう通知する．\n\n▼ 受取人一覧\n${memberLines}\n\n以上，速やかに対応されたし．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+  },
+];
+
+// ─── 出欠確認 ───
+
+export const ATTENDANCE_TEMPLATES = [
+  {
+    id: 'casual',
+    label: 'カジュアル系',
+    description: '友達ノリの気軽な文体',
+    generate: ({ eventName, eventDate, eventTime, place, deadline, memberLines, siteUrl }) =>
+      `📢 出欠確認！\n\n${eventName} の出欠を教えてください〜！\n\n📅 日時：${eventDate}${eventTime ? ' ' + eventTime : ''}\n${place ? '📍 場所：' + place + '\n' : ''}⏰ 回答期限：${deadline}\n\n${memberLines}\n\n◯ or ✕ で返信よろしく！\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+  },
+  {
+    id: 'formal',
+    label: '事務的系',
+    description: '業務連絡風の硬い文体',
+    generate: ({ eventName, eventDate, eventTime, place, deadline, memberLines, siteUrl }) =>
+      `【出欠確認】${eventName}\n\n下記の通り出欠確認をお願いいたします．\n\n件　名：${eventName}\n日　時：${eventDate}${eventTime ? ' ' + eventTime : ''}\n${place ? '場　所：' + place + '\n' : ''}回答期限：${deadline}\n\n▼ 対象者\n${memberLines}\n\n出席 / 欠席 をご返信ください．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+  },
+  {
+    id: 'pressure',
+    label: '圧力系',
+    description: '強制召喚風のやりすぎ文体',
+    generate: ({ eventName, eventDate, eventTime, place, deadline, memberLines, siteUrl }) =>
+      `【緊急召喚令】\n\n下記の者は${eventName}への出席可否を速やかに報告せよ．\n\n日　時：${eventDate}${eventTime ? ' ' + eventTime : ''}\n${place ? '場　所：' + place + '\n' : ''}回答期限：${deadline}（厳守）\n\n▼ 召喚対象\n${memberLines}\n\n未回答者には追加の催促が発動されます．\n\n※本通知は催促くん（${siteUrl}）により自動生成されています`,
+  },
+];
+
 // バリデーションルール
 export const VALIDATION = {
   targetName: { maxLength: 30 },
   customSubject: { maxLength: 30 },
   amount: { min: 1, max: 9999999 },
+  eventName: { maxLength: 50 },
+  place: { maxLength: 50 },
+  memberName: { maxLength: 30 },
 };

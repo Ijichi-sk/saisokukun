@@ -3,151 +3,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>催促くん ─ 支払催促通知文 自動生成サービス</title>
-  <meta name="description" content="友人・知人へのお金の催促を、ユーモアある自動生成テンプレートでスムーズに。催促くんがあなたの代わりに角の立たない催促文を作成します。">
+  <title>催促くん ─ 催促通知文 自動生成サービス</title>
+  <meta name="description" content="お金の催促も出欠確認も，催促くんにおまかせ。テンプレートを自動生成してLINEやメールにコピペするだけ。">
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/form.css">
-  <link rel="stylesheet" href="css/result.css">
 </head>
 <body>
 
-  <!-- ===== ヘッダー ===== -->
   <header class="header">
+    <span class="header__icon">📜</span>
     <h1 class="header__title">催促くん</h1>
-    <p class="header__subtitle">支払催促通知文 自動生成サービス</p>
+    <p class="header__subtitle">催促通知文 自動生成サービス</p>
+    <span class="header__border"></span>
   </header>
 
   <main class="container">
+    <h2 class="section-title">モードを選択</h2>
 
-    <!-- ===== 入力フォームセクション ===== -->
-    <section id="formSection">
-      <h2 class="section-title">通知文生成フォーム</h2>
+    <div class="menu-grid">
+      <a href="money.html" class="menu-card" id="menuMoney">
+        <span class="menu-card__icon">💰</span>
+        <h3 class="menu-card__title">お金の催促</h3>
+        <p class="menu-card__desc">支払いの催促文を自動生成します．<br>複数人への一括催促にも対応．</p>
+      </a>
 
-      <form id="saisokuForm" class="form-card" novalidate>
+      <a href="attendance.html" class="menu-card" id="menuAttendance">
+        <span class="menu-card__icon">📋</span>
+        <h3 class="menu-card__title">出欠確認</h3>
+        <p class="menu-card__desc">イベントの出欠確認テンプレートを<br>自動生成します．</p>
+      </a>
+    </div>
 
-        <!-- 相手のお名前 -->
-        <div class="form-group">
-          <label class="form-group__label" for="targetName">
-            相手のお名前<span class="required">（必須）</span>
-          </label>
-          <input
-            type="text"
-            id="targetName"
-            class="form-input"
-            maxlength="30"
-            placeholder="例：田中，佐藤さん"
-            autocomplete="off"
-          >
-          <span id="targetName-error" class="error-message"></span>
-        </div>
-
-        <!-- 件名 -->
-        <div class="form-group">
-          <label class="form-group__label" for="subject">
-            件名<span class="required">（必須）</span>
-          </label>
-          <div class="select-wrapper">
-            <select id="subject" class="form-select">
-              <!-- JS側で動的生成 -->
-            </select>
-          </div>
-          <span id="subject-error" class="error-message"></span>
-        </div>
-
-        <!-- 件名（その他 自由入力） -->
-        <div class="form-group" id="customSubjectGroup" style="display: none;">
-          <label class="form-group__label" for="customSubject">
-            件名（自由入力）<span class="required">（必須）</span>
-          </label>
-          <input
-            type="text"
-            id="customSubject"
-            class="form-input"
-            maxlength="30"
-            placeholder="例：共同購入代，サプライズ代"
-            autocomplete="off"
-          >
-          <span id="customSubject-error" class="error-message"></span>
-        </div>
-
-        <!-- 金額 -->
-        <div class="form-group">
-          <label class="form-group__label" for="amount">
-            金額<span class="required">（必須）</span>
-          </label>
-          <div class="amount-wrapper">
-            <span class="amount-wrapper__prefix">¥</span>
-            <input
-              type="number"
-              id="amount"
-              class="form-input"
-              min="1"
-              max="9999999"
-              placeholder="例：3000"
-              inputmode="numeric"
-            >
-          </div>
-          <span id="amount-error" class="error-message"></span>
-          <p class="form-hint">※ 整数で入力してください（最大 ¥9,999,999）</p>
-        </div>
-
-        <!-- 支払期日 -->
-        <div class="form-group">
-          <label class="form-group__label" for="dueDate">
-            支払期日<span class="required">（必須）</span>
-          </label>
-          <input
-            type="date"
-            id="dueDate"
-            class="form-input form-date"
-          >
-          <span id="dueDate-error" class="error-message"></span>
-        </div>
-
-        <!-- 送信ボタン -->
-        <div class="form-submit">
-          <button type="submit" class="btn btn--primary">通知文を生成する</button>
-        </div>
-      </form>
-
-      <!-- 注意書き -->
-      <div class="form-notice">
-        <strong>ご利用上の注意</strong><br>
-        本サービスは催促文のテンプレートを生成するジョークツールです．
-        生成された文面の利用は自己責任でお願いいたします．
-        すべての処理はお使いのブラウザ内で完結し，入力内容がサーバーに送信されることは一切ございません．
-      </div>
-    </section>
-
-    <!-- ===== 生成結果セクション ===== -->
-    <section id="resultSection" class="hidden">
-      <h2 class="section-title">生成結果</h2>
-
-      <div id="resultContainer">
-        <!-- JS側で動的生成 -->
-      </div>
-
-      <div class="result-actions">
-        <button type="button" id="resetBtn" class="btn btn--secondary">最初からやり直す</button>
-      </div>
-    </section>
-
+    <div class="form-notice">
+      <strong>ご利用上の注意</strong><br>
+      本サービスは催促文のテンプレートを生成するジョークツールです．
+      すべての処理はお使いのブラウザ内で完結し，入力内容がサーバーに送信されることは一切ございません．
+    </div>
   </main>
 
-  <!-- ===== フッター ===== -->
   <footer class="footer">
     <p>催促くん &copy; 2026 ─ 本サービスはジョークツールです</p>
   </footer>
-
-  <!-- Scripts (ES Modules) -->
-  <script type="module" src="js/app.js"></script>
 
 </body>
 </html>
